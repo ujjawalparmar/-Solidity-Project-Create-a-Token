@@ -14,26 +14,38 @@ The fourth step is to develop another function called burn function. This method
 ### Executing program
 To execute this program, utilise Remix, an online Solidity IDE. To get started, visit the Remix website at https://remix.ethereum.org. Once on the Remix website, click the "+" icon in the left-hand sidebar to create a new file. Save the file with a.sol extension (such as MyToken.sol). Copy and paste the code below into the file.
 
-// SPDX-License-Identifier: MIT pragma solidity 0.8.18; contract myToken {
 
-string public tokenName = "ALPHA";
-string public tokenAbbrv = "BETA";
-uint public totSupply = 0; 
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
 
-mapping(address => uint) public balances;
+contract MyToken {
 
-function mint(uint _value, address _address) public {
-    totSupply += _value;
-    balances[_address] += _value;
-}
+    // public variables here
+    string public tokenName = "META";
+    string public tokenAbbrv = "MTA";
+    uint public totalSupply = 0;
 
-function burn(uint _value, address _address) public {
-    if (balances[_address] >= _value){
-        totSupply -= _value;
-        balances[_address] -= _value;
+    // mapping variable here
+    mapping(address => uint) public balances;
+
+    // mint function
+    function mint(address _address, uint _value) public {
+        totalSupply += _value;
+        balances[_address] += _value;
     }
-}
-}
+
+    // burn function
+    function burn(address _address, uint _value) public {
+        if (balances[_address] >= _value) {
+            totalSupply -= _value;
+            balances[_address] -= _value;
+        } else {
+            // Add your desired error handling here, like reverting the transaction
+        }
+       }
+     }
+    
+
 
  ####  Help
 To compile the code, select the "Solidity Compiler" tab from the left-hand sidebar. Make sure the "Compiler" option is selected to "0.8.18" (or a compatible version), then click the "Compile MyToken.sol" button.
